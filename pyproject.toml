@@ -4,7 +4,7 @@ name = "app"
 version = "0.0.1"
 description = "Example App"
 authors = ["Max Hösel <musicbird@maxhoesel.de>"]
-license = "LICENSE"
+license = "GPL-3.0-or-later"
 packages = [
     { include = "app", from = "src" },
 ]
