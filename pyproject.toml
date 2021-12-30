@@ -1,0 +1,50 @@
+
+[tool.poetry]
+name = "app"
+version = "0.0.1"
+description = "Example App"
+authors = ["Max Hösel <musicbird@maxhoesel.de>"]
+license = "LICENSE"
+packages = [
+    { include = "app", from = "src" },
+]
+keywords = ["app", "example"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3 :: Only",
+]
+
+[tool.poetry.urls]
+"Repository" = "https://github.com/maxhoesel/python-project-template"
+
+[tool.poetry.dependencies]
+python = "^3.6.2"
+schema = "^0.7.5"
+ffmpeg-python = "^0.2.0"
+PyYAML = "^6.0"
+
+[tool.poetry.dev-dependencies]
+pylint = "^2.12.2"
+pytest = "^6.2.5"
+pytest-cov = "^3.0.0"
+pytest-xdist = {extras = ["psutil"], version = "^2.5.0"}
+autopep8 = "^1.6.0"
+
+[tool.poetry.scripts]
+app = 'app.__main__:entrypoint'
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+addopts="-nauto --basetemp=.pytest_tmp --cov=app --cov-report=html --cov-report=term --cov-report=xml"
+
+[tool.autopep8]
+max_line_length = 120
