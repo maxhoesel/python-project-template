@@ -1,7 +1,7 @@
-Musicbird Module API Reference
-==============================
+Module API Reference
+====================
 
 .. toctree::
    :maxdepth: 4
 
-   musicbird
+   app

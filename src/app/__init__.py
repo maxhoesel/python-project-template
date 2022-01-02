@@ -1,1 +1,3 @@
-__version__ = "0.0.1"
+from importlib import metadata
+
+__version__ = metadata.version('app')

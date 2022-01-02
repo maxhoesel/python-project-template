@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.6", "3.7", "3.8", "3.9"]
+        python-version: ["3.8", "3.9"]
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
@@ -23,23 +23,56 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        sudo apt update && sudo apt install -y ffmpeg opus-tools
         python3 -m pip install --upgrade pip
         pip install tox tox-gh-actions poetry
     - name: Test with tox
       run: tox
 
-  coverage:
+  gitlint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
+      with:
+        # Can't have the merge commit in there as it confuses the hell out of gitlint
+        ref: ${{ github.event.pull_request.head.sha }}
+    - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: "3.9"
     - name: Install dependencies
       run: |
-        sudo apt update && sudo apt install -y ffmpeg opus-tools
+        python3 -m pip install --upgrade pip
+        pip install tox tox-gh-actions poetry
+
+    - name: Run gitlint
+      run: tox -e gitlint
+
+  pylint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.9"
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip install tox tox-gh-actions poetry
+
+    - name: Run pylint
+      run: tox -e pylint
+
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.9"
+    - name: Install dependencies
+      run: |
         python3 -m pip install --upgrade pip
         pip install tox tox-gh-actions poetry
     - name: Geneerate coverate report

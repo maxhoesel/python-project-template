@@ -10,7 +10,7 @@ logger = logging.getLogger("app")
 
 
 def main(args: List[str]) -> bool:
-    logger.info(f"App version {__version__}")
+    logger.info(f"app version {__version__}")
     return True
 
 
