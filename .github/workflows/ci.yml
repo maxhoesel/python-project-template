@@ -47,7 +47,7 @@ jobs:
     - name: Run gitlint
       run: tox -e lint
 
-  pylint:
+  lint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -61,7 +61,7 @@ jobs:
         pip install tox tox-gh-actions poetry
 
     - name: Run pylint
-      run: tox -e pylint
+      run: tox -e lint
 
   coverage:
     runs-on: ubuntu-latest
